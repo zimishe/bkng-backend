@@ -1,6 +1,17 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../services/sequelize";
 
+export interface IUserAttributes {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  passwordHash: string;
+}
+
 export const UserModel = sequelize.define(
   "User",
   {

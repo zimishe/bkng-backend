@@ -1,6 +1,9 @@
-import { UserModel } from "./users.model";
+import { Model } from "sequelize";
+import { IUserAttributes, UserModel } from "./users.model";
 
-export const findUserDataByEmail = async (email: string) => {
+export const findUserDataByEmail = async (
+  email: string,
+): Promise<Model<IUserAttributes> | null> => {
   const existingUser = await UserModel.findOne({
     where: { email },
   });

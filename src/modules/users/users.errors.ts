@@ -7,3 +7,11 @@ export class UserAlreadyExistsError extends AppError {
     super("User already exists");
   }
 }
+
+export class UserNotFoundError extends AppError {
+  readonly statusCode = 404;
+
+  constructor() {
+    super("User not found");
+  }
+}

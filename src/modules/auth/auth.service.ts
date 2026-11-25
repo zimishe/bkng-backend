@@ -1,7 +1,12 @@
 import bcrypt from "bcrypt";
-import { UserAlreadyExistsError } from "../users/users.errors";
+import {
+  UserAlreadyExistsError,
+  UserNotFoundError,
+} from "../users/users.errors";
 import { createUserData, findUserDataByEmail } from "../users/users.service";
-import { ICreateUserPayload } from "./types";
+import { ICreateUserPayload, ILoginPayload } from "./types";
+import { InvalidCredentialsError } from "./auth.errors";
+import { generateJWT } from "../../utils/auth";
 
 export const signup = async ({
   firstName,
@@ -23,4 +28,29 @@ export const signup = async ({
     email,
     passwordHash: hashedPassword,
   });
+};
+
+export const login = async ({ email, password }: ILoginPayload) => {
+  if (!email || !password) {
+    throw new InvalidCredentialsError();
+  }
+
+  const existingUser = await findUserDataByEmail(email);
+
+  if (!existingUser) {
+    throw new UserNotFoundError();
+  }
+
+  const isPasswordValid = await bcrypt.compare(
+    password,
+    existingUser.getDataValue("passwordHash"),
+  );
+
+  if (!isPasswordValid) {
+    throw new InvalidCredentialsError();
+  }
+
+  const token = generateJWT(existingUser.getDataValue("id"));
+
+  return token;
 };
