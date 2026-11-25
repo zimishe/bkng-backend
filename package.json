@@ -1,0 +1,25 @@
+{
+  "name": "node-backend",
+  "version": "1.0.0",
+  "description": "backend for a simple booking site",
+  "license": "ISC",
+  "author": "Yevhen Shuliakivskyi",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsx watch index.ts"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.3.0",
+    "pg": "^8.23.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
+}
