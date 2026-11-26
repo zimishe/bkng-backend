@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../../services/sequelize";
+import { sequelize } from "../services/sequelize";
 
 export interface IUserAttributes {
   id: string;

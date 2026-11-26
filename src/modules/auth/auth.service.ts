@@ -3,10 +3,13 @@ import {
   UserAlreadyExistsError,
   UserNotFoundError,
 } from "../users/users.errors";
-import { createUserData, findUserDataByEmail } from "../users/users.service";
 import { ICreateUserPayload, ILoginPayload } from "./types";
 import { InvalidCredentialsError } from "./auth.errors";
-import { generateJWT } from "../../utils/auth";
+import { generateJWT } from "../../common/utils/auth";
+import {
+  createUserData,
+  findUserDataByEmail,
+} from "../../common/services/users";
 
 export const signup = async ({
   firstName,
