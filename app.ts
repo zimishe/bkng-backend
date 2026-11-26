@@ -6,8 +6,13 @@ import { errorHandler } from "./src/common/middlewares/error-handler";
 
 export const app: Express = express();
 
+const corsOptions = {
+  origin: process.env.FRONTEND_DEV_URL || "http://localhost:4000",
+  credentials: true,
+};
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/auth", authRouter);
 app.use(errorHandler);
